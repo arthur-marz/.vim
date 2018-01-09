@@ -1,0 +1,217 @@
+" Accept only Vi Improved
+if &compatible
+  set nocompatible
+end
+
+"" Plugins
+call plug#begin('~/.vim/plugged')
+
+  " Git
+    " All needed for git handling straight in vim
+    Plug 'tpope/vim-fugitive'
+    " Github facilities for projects
+    Plug 'tpope/vim-rhubarb'
+    " See git diff right in the gutter for current file
+    Plug 'airblade/vim-gitgutter'
+
+  " Appearance
+    " Molokai theme
+    Plug 'tomasr/molokai'
+    " Nice lower bar with colors and signs
+    Plug 'Bling/vim-airline'
+    " Color themes for airline with configurable setup
+    Plug 'vim-airline/vim-airline-themes'
+    " Color highlight for CSS colors
+    Plug 'gorodinskiy/vim-coloresque'
+
+  " Shell
+    " Run shell commands asyncronously in Vim
+    Plug 'skywind3000/asyncrun.vim'
+
+  " HTML
+    " Expand into HTML tags from short forms
+    Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+  " Navigation
+    " Move through the words even with {camel,snake}case
+    Plug 'bkad/CamelCaseMotion'
+    " Fast motion and search through the file
+    Plug 'Lokaltog/vim-easymotion'
+    " Tree file manager
+    Plug 'scrooloose/nerdtree'
+    " Fuzzy file search
+    Plug 'ctrlpvim/ctrlp.vim'
+    " Silver-searcher plugin
+    Plug 'rking/ag.vim'
+    " Tags
+    Plug 'majutsushi/tagbar'
+    " Move selections back and forth
+    Plug 'matze/vim-move'
+
+  " Editing
+    " Linting in async
+    Plug 'w0rp/ale'
+    " Intelligent auto complete
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+    " Show trailing whitspaces
+    Plug 'ntpeters/vim-better-whitespace'
+    " Auto closing of parenthesis
+    Plug 'Raimondi/delimitMate'
+    " Surround anything with any strings
+    Plug 'tpope/vim-surround'
+    " Repeat last executed command
+    Plug 'tpope/vim-repeat'
+    " Commenting made easy
+    Plug 'tomtom/tcomment_vim'
+
+  " Ruby
+    " Rails facilities
+    Plug 'tpope/vim-rails'
+    " Ruby syntax and runners
+    Plug 'vim-ruby/vim-ruby'
+    " Insert block endinings
+    Plug 'tpope/vim-endwise'
+    " Rspec running
+    Plug 'thoughtbot/vim-rspec'
+    " Vim dispatch
+    Plug 'tpope/vim-dispatch'
+
+call plug#end()
+
+"" Plugin Settings
+
+  " Navigation
+
+    " Set smart case handling for easymotion
+    let g:EasyMotion_smartcase = 1
+    " Map search to "/"
+    map  / <Plug>(easymotion-sn)
+    omap / <Plug>(easymotion-tn)
+    " Mappings for search points movement
+    map  n <Plug>(easymotion-next)
+    map  N <Plug>(easymotion-prev)
+
+    " Open NerdTree on <C-n>
+    map <C-n> :NERDTreeToggle<CR>
+
+    " Ag excludes for rails directories
+    if executable('ag')
+        set grepprg=ag\ --nogroup\ --nocolor
+          let g:ctrlp_use_caching = 0
+            let g:ctrlp_user_command = 'ag %s -l --nocolor --nogroup --column -g ""
+                \ --ignore-dir "bin"
+                \ --ignore-dir "coverage"
+                \ --ignore-dir "data"
+                \ --ignore-dir "design"
+                \ --ignore-dir "doc"
+                \ --ignore-dir "log"
+                \ --ignore-dir "public"
+                \ --ignore-dir "spec_old"
+                \ --ignore-dir "studios"
+                \ --ignore-dir "template"
+                \ --ignore-dir "tmp"
+                \ --ignore-dir "vendor"
+                \ --ignore-dir "vendor"
+                \ --ignore-dir "verificator"
+                \ --ignore "*.log"
+                \ --ignore "*tags"
+                \ --ignore "db/schema*"'
+
+    " AG
+    map <Leader>g :Ag<SPACE>
+      let g:ag_prg='ag -S --nocolor --nogroup --column
+            \ --ignore-dir "bin"
+            \ --ignore-dir "coverage"
+            \ --ignore-dir "data"
+            \ --ignore-dir "design"
+            \ --ignore-dir "doc"
+            \ --ignore-dir "log"
+            \ --ignore-dir "public"
+            \ --ignore-dir
+      "spec_old"
+            \ --ignore-dir
+      "studios"
+            \
+      --ignore-dir
+      "template"
+            \
+      --ignore-dir
+      "tmp"
+            \
+      --ignore-dir
+      "vendor"
+            \
+      --ignore-dir
+      "vendor"
+            \
+      --ignore-dir
+      "verificator"
+            \
+      --ignore
+      "*.log"
+            \
+      --ignore
+      "*tags"
+            \
+      --ignore
+      "db/schema*"'
+    endif
+
+    " Remap buttons for CamelCase movement
+    map <silent> w <Plug>CamelCaseMotion_w
+    map <silent> b <Plug>CamelCaseMotion_b
+    map <silent> e <Plug>CamelCaseMotion_e
+    sunmap w
+    sunmap b
+    sunmap e
+
+  " Ruby
+
+    " RSpec
+    map <Leader>t :call RunCurrentSpecFile()<CR>
+    map <Leader>s :call RunNearestSpec()<CR>
+
+  " Linters
+
+    " Move between linting errors
+    nnoremap ]r :ALENextWrap<CR>
+    nnoremap [r :ALEPreviousWrap<CR>
+
+    " Set linters for Ale
+    let g:ale_linters = {
+          \   'ruby': ['ruby', 'reek', 'rubocop', 'brakeman', 'rails_best_practices'],
+          \}
+
+    " Enable warning broadcast in airline bar
+    let g:airline#extensions#ale#enabled = 1
+
+    " Set icons and enable gutter display for Ale
+    let g:ale_completion_enabled = 1
+    let g:ale_sign_column_always = 1
+    let g:ale_echo_msg_error_str = '☠ '
+    let g:ale_echo_msg_warning_str = '♿'
+    let g:ale_sign_error = '☠ '
+    let g:ale_sign_warning = '♿'
+    let g:ale_echo_msg_format = '[%linter%] %s'
+
+  " Appearance
+
+    " Airline configuration
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+    let g:airline_theme='dark'
+    set laststatus=2
+
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+
+    " Molokai configuration
+    set t_Co=256
+    let g:molokai_original = 1
+    let g:rehash256 = 1
+    colo molokai
+    hi Normal ctermfg=252 ctermbg=none
+    hi Comment cterm=italic
+
