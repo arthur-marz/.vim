@@ -25,8 +25,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'gorodinskiy/vim-coloresque'
 
   " Shell
-    " Run shell commands asyncronously in Vim
-    Plug 'skywind3000/asyncrun.vim'
+    " Fire compile and test commands in an async manner
+    Plug 'tpope/vim-dispatch'
 
   " HTML
     " Expand into HTML tags from short forms
@@ -127,34 +127,16 @@ call plug#end()
             \ --ignore-dir "doc"
             \ --ignore-dir "log"
             \ --ignore-dir "public"
-            \ --ignore-dir
-      "spec_old"
-            \ --ignore-dir
-      "studios"
-            \
-      --ignore-dir
-      "template"
-            \
-      --ignore-dir
-      "tmp"
-            \
-      --ignore-dir
-      "vendor"
-            \
-      --ignore-dir
-      "vendor"
-            \
-      --ignore-dir
-      "verificator"
-            \
-      --ignore
-      "*.log"
-            \
-      --ignore
-      "*tags"
-            \
-      --ignore
-      "db/schema*"'
+            \ --ignore-dir "spec_old"
+            \ --ignore-dir "studios"
+            \ --ignore-dir "template"
+            \ --ignore-dir "tmp"
+            \ --ignore-dir "vendor"
+            \ --ignore-dir "vendor"
+            \ --ignore-dir "verificator"
+            \ --ignore "*.log"
+            \ --ignore "*tags"
+            \ --ignore "db/schema*"'
     endif
 
     " Remap buttons for CamelCase movement
@@ -215,3 +197,11 @@ call plug#end()
     hi Normal ctermfg=252 ctermbg=none
     hi Comment cterm=italic
 
+  " Git
+
+    " fugitive mappings
+    map <Leader>.s :Gstatus<CR>
+    map <Leader>.b :Gblame<CR>
+    map <Leader>.w :Gbrowse<CR>
+    map <Leader>.d :Gdiff<CR>
+    set diffopt+=vertical
