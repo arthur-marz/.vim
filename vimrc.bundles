@@ -75,6 +75,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'thoughtbot/vim-rspec'
     " Vim dispatch
     Plug 'tpope/vim-dispatch'
+  " Javascript
+    " Syntax highlighing
+    Plug 'pangloss/vim-javascript'
+    " JSX highlighting
+    Plug 'mxw/vim-jsx'
+    " JSON highlighting
+    Plug 'leshill/vim-json'
 
 call plug#end()
 
@@ -162,7 +169,14 @@ call plug#end()
     " Set linters for Ale
     let g:ale_linters = {
           \   'ruby': ['ruby', 'reek', 'rubocop', 'brakeman', 'rails_best_practices'],
+            \ 'javascript': ['standard'],
           \}
+
+    let g:ale_fixers = {
+      \'ruby': ['rubocop'],
+      \'javascript': ['prettier'],
+    \}
+
 
     " Enable warning broadcast in airline bar
     let g:airline#extensions#ale#enabled = 1
@@ -175,6 +189,7 @@ call plug#end()
     let g:ale_sign_error = '☠ '
     let g:ale_sign_warning = '♿'
     let g:ale_echo_msg_format = '[%linter%] %s'
+    let g:ale_fix_on_save = 1
 
   " Appearance
 
@@ -205,3 +220,7 @@ call plug#end()
     map <Leader>.w :Gbrowse<CR>
     map <Leader>.d :Gdiff<CR>
     set diffopt+=vertical
+
+  " Javascript
+    let g:javascript_plugin_jsdoc = 1
+    let g:jsx_ext_required = 0
