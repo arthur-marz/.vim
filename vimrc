@@ -141,4 +141,5 @@
     set exrc
     " Secure global environment from .vimrc commands in the folders
     set secure
-
+    " No swapfiles
+    set noswapfile

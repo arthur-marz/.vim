@@ -169,7 +169,7 @@ call plug#end()
     " Set linters for Ale
     let g:ale_linters = {
           \   'ruby': ['ruby', 'reek', 'rubocop', 'brakeman', 'rails_best_practices'],
-            \ 'javascript': ['standard'],
+            \ 'javascript': ['prettier'],
           \}
 
     let g:ale_fixers = {
