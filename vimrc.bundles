@@ -24,14 +24,6 @@ call plug#begin('~/.vim/plugged')
     " Color highlight for CSS colors
     Plug 'gorodinskiy/vim-coloresque'
 
-  " Shell
-    " Fire compile and test commands in an async manner
-    Plug 'tpope/vim-dispatch'
-
-  " HTML
-    " Expand into HTML tags from short forms
-    Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-
   " Navigation
     " Move through the words even with {camel,snake}case
     Plug 'bkad/CamelCaseMotion'
@@ -51,8 +43,6 @@ call plug#begin('~/.vim/plugged')
   " Editing
     " Linting in async
     Plug 'w0rp/ale'
-    " Intelligent auto complete
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
     " Show trailing whitspaces
     Plug 'ntpeters/vim-better-whitespace'
     " Auto closing of parenthesis
