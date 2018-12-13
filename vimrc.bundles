@@ -9,8 +9,6 @@ call plug#begin('~/.vim/plugged')
   " Git
     " All needed for git handling straight in vim
     Plug 'tpope/vim-fugitive'
-    " Github facilities for projects
-    Plug 'tpope/vim-rhubarb'
     " See git diff right in the gutter for current file
     Plug 'airblade/vim-gitgutter'
 
@@ -164,11 +162,6 @@ call plug#end()
             \ 'javascript': ['prettier'],
           \}
 
-    let g:ale_fixers = {
-      \'ruby': ['rubocop'],
-      \'javascript': ['prettier'],
-    \}
-
 
     " Enable warning broadcast in airline bar
     let g:airline#extensions#ale#enabled = 1
@@ -214,5 +207,4 @@ call plug#end()
     set diffopt+=vertical
 
   " Javascript
-    let g:javascript_plugin_jsdoc = 1
     let g:jsx_ext_required = 0

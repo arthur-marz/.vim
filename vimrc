@@ -17,9 +17,6 @@
     noremap <Left> <nop>
     noremap <Right> <nop>
 
-    " Map move keys to avoid leaping through fake wrapped lines
-    nnoremap j gj
-    nnoremap k gk
 
     " Highlight last inserted text
     nnoremap gV `[v`]
@@ -45,12 +42,6 @@
     vnoremap <silent> y y`]
     vnoremap <silent> p p`]
     nnoremap <silent> p p`]
-
-    " Switch between the last two files
-    nnoremap <Leader><Leader> <C-^>
-
-    " Space open/closes folds
-    nnoremap <space> za
 
   "" Indentation settings
 
@@ -83,9 +74,6 @@
     " Show line numbers
     set number
 
-    " Set relative numbers
-    set rnu
-
     " Set line and column highlighting
     set cursorline
     set cursorcolumn
@@ -111,10 +99,6 @@
 
     " Automatically write before running commands
     set autowrite
-
-    " Make it obvious where is 120 characters
-    highlight OverLength ctermbg=cyan ctermfg=white guibg=#592929
-    match OverLength /\%120v.\+/
 
   "" Windows
 
