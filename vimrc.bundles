@@ -61,8 +61,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-endwise'
     " Slim
     Plug 'slim-template/vim-slim'
-    " Rspec running
-    Plug 'thoughtbot/vim-rspec'
+    " Test running
+    Plug 'janko-m/vim-test'
     " Vim dispatch
     Plug 'tpope/vim-dispatch'
   " Javascript
@@ -146,9 +146,13 @@ call plug#end()
 
   " Ruby
 
-    " RSpec
-    map <Leader>t :call RunCurrentSpecFile()<CR>
-    map <Leader>s :call RunNearestSpec()<CR>
+    " Test
+    map <Leader>t :TestFile<CR>
+    map <Leader>s :TestNearest<CR>
+    if !empty(glob("docker-compose.yml"))
+      let test#ruby#rspec#executable = 'docker-compose run web rspec'
+    end
+
 
   " Linters
 
