@@ -9,8 +9,6 @@ call plug#begin('~/.vim/plugged')
   " Git
     " All needed for git handling straight in vim
     Plug 'tpope/vim-fugitive'
-    " Github facilities for projects
-    Plug 'tpope/vim-rhubarb'
     " See git diff right in the gutter for current file
     Plug 'airblade/vim-gitgutter'
 
@@ -63,8 +61,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-ruby/vim-ruby'
     " Insert block endinings
     Plug 'tpope/vim-endwise'
-    " Rspec running
-    Plug 'thoughtbot/vim-rspec'
+    " Slim
+    Plug 'slim-template/vim-slim'
+    " Test running
+    Plug 'janko-m/vim-test'
     " Vim dispatch
     Plug 'tpope/vim-dispatch'
   " Javascript
@@ -152,9 +152,13 @@ call plug#end()
 
   " Ruby
 
-    " RSpec
-    map <Leader>t :call RunCurrentSpecFile()<CR>
-    map <Leader>s :call RunNearestSpec()<CR>
+    " Test
+    map <Leader>t :TestFile<CR>
+    map <Leader>s :TestNearest<CR>
+    if !empty(glob("docker-compose.yml"))
+      let test#ruby#rspec#executable = 'docker-compose run web rspec'
+    end
+
 
   " Linters
 
@@ -165,8 +169,8 @@ call plug#end()
     " Set linters for Ale
     let g:ale_linters = {
           \   'ruby': ['ruby', 'reek', 'rubocop', 'brakeman', 'rails_best_practices'],
-            \ 'javascript': ['eslint']
-    \}
+            \ 'javascript': ['prettier'],
+          \}
 
 
 
@@ -213,5 +217,4 @@ call plug#end()
     set diffopt+=vertical
 
   " Javascript
-    let g:javascript_plugin_jsdoc = 1
     let g:jsx_ext_required = 0
