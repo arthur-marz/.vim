@@ -97,7 +97,7 @@
 
   "" Shell
     " Set shell for Vim
-    set shell=/bin/bash
+    set shell=/bin/zsh
 
   "" Editing
 
@@ -106,15 +106,16 @@
       autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     endif
 
+    " Prettier
+    command Prt execute "! prettier --write %"
+
     " Delete trailing whitespaces
     autocmd BufWritePre * :%s/\s\+$//e
 
     " Automatically write before running commands
     set autowrite
-
-    " Make it obvious where is 120 characters
-    highlight OverLength ctermbg=cyan ctermfg=white guibg=#592929
-    match OverLength /\%120v.\+/
+    " Set arb to be recognized as ruby
+    autocmd BufRead,BufNewFile *.arb setfiletype ruby
 
   "" Windows
 

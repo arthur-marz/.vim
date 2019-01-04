@@ -15,8 +15,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'
 
   " Appearance
-    " Molokai theme
-    Plug 'tomasr/molokai'
+    " Oceanic theme
+    Plug 'yosiat/oceanic-next-vim'
     " Nice lower bar with colors and signs
     Plug 'Bling/vim-airline'
     " Color themes for airline with configurable setup
@@ -34,7 +34,7 @@ call plug#begin('~/.vim/plugged')
     " Fuzzy file search
     Plug 'ctrlpvim/ctrlp.vim'
     " Silver-searcher plugin
-    Plug 'rking/ag.vim'
+    Plug 'mileszs/ack.vim'
     " Tags
     Plug 'majutsushi/tagbar'
     " Move selections back and forth
@@ -58,6 +58,8 @@ call plug#begin('~/.vim/plugged')
     " Rails facilities
     Plug 'tpope/vim-rails'
     " Ruby syntax and runners
+    Plug 'slim-template/vim-slim'
+    " Slim
     Plug 'vim-ruby/vim-ruby'
     " Insert block endinings
     Plug 'tpope/vim-endwise'
@@ -72,6 +74,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'mxw/vim-jsx'
     " JSON highlighting
     Plug 'leshill/vim-json'
+    " Vue.js highlighting
+    Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -99,6 +103,7 @@ call plug#end()
                 \ --ignore-dir "bin"
                 \ --ignore-dir "coverage"
                 \ --ignore-dir "data"
+                \ --ignore-dir "node_modules"
                 \ --ignore-dir "design"
                 \ --ignore-dir "doc"
                 \ --ignore-dir "log"
@@ -115,13 +120,14 @@ call plug#end()
                 \ --ignore "db/schema*"'
 
     " AG
-    map <Leader>g :Ag<SPACE>
-      let g:ag_prg='ag -S --nocolor --nogroup --column
+    map <Leader>g :Ack!<SPACE>
+      let g:ackprg='ag -S --nocolor --nogroup --column
             \ --ignore-dir "bin"
             \ --ignore-dir "coverage"
             \ --ignore-dir "data"
             \ --ignore-dir "design"
             \ --ignore-dir "doc"
+            \ --ignore-dir "node_modules"
             \ --ignore-dir "log"
             \ --ignore-dir "public"
             \ --ignore-dir "spec_old"
@@ -159,13 +165,10 @@ call plug#end()
     " Set linters for Ale
     let g:ale_linters = {
           \   'ruby': ['ruby', 'reek', 'rubocop', 'brakeman', 'rails_best_practices'],
-            \ 'javascript': ['standard'],
-          \}
-
-    let g:ale_fixers = {
-      \'ruby': ['rubocop'],
-      \'javascript': ['prettier'],
+            \ 'javascript': ['eslint']
     \}
+
+
 
 
     " Enable warning broadcast in airline bar
@@ -180,6 +183,8 @@ call plug#end()
     let g:ale_sign_warning = '♿'
     let g:ale_echo_msg_format = '[%linter%] %s'
     let g:ale_fix_on_save = 1
+    highlight ALEWarning ctermbg=DarkMagenta
+    highlight ALEError ctermbg=DarkMagenta
 
   " Appearance
 
@@ -194,13 +199,9 @@ call plug#end()
     let g:airline_right_sep = ''
     let g:airline_right_alt_sep = ''
 
-    " Molokai configuration
-    set t_Co=256
-    let g:molokai_original = 1
-    let g:rehash256 = 1
-    colo molokai
-    hi Normal ctermfg=252 ctermbg=none
-    hi Comment cterm=italic
+    " Colorscheme
+    colorscheme OceanicNext
+    hi Comment guifg=#FFA
 
   " Git
 
