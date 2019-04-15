@@ -73,6 +73,15 @@ call plug#begin('~/.vim/plugged')
     " JSON highlighting
     Plug 'leshill/vim-json'
 
+  " Elixir
+    Plug 'slashmili/alchemist.vim'
+
+  " Swift
+    Plug 'keith/swift.vim'
+
+  " Rust
+    Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 "" Plugin Settings
@@ -149,9 +158,6 @@ call plug#end()
     " Test
     map <Leader>t :TestFile<CR>
     map <Leader>s :TestNearest<CR>
-    if !empty(glob("docker-compose.yml"))
-      let test#ruby#rspec#executable = 'docker-compose run web rspec'
-    end
 
 
   " Linters
